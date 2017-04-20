@@ -58,7 +58,7 @@ function startApp() {
     };
 
     var gameState = gameStates.introducingEmoticons;
-    var selection01 = []; // Note to self: Make these objects
+    var selection01 = [];
     var selection02 = [];
     var sounds = {};
     var mouseX, mouseY;
@@ -73,7 +73,6 @@ function startApp() {
     var selections;
     var score = 0;
 
-    // Note to self: Extract Sound code into a Sound Manager object
     Object.defineProperty(Sound.prototype, "volume",
         {
             get: function () {
@@ -162,7 +161,6 @@ function startApp() {
 
         function checkImagesLoaded() {
             if (boardPopulator.imagesStillLoading > 0) {
-                //pause();
                 window.setTimeout(checkImagesLoaded, 1000 / 60);
             }
         }
@@ -236,7 +234,7 @@ function startApp() {
                 case gameStates.checkingForAdditionalMatches:
                     boardImpl.findMatches();
                     if (boardImpl.matchesFound()) {
-                        boardImpl.playAudio(); // WILL BE IN SOUND MANAGER
+                        boardImpl.playAudio();
                         gameState = gameStates.highlightingMatches;
                     } else {
                         gameState = gameStates.mainLooping;
@@ -321,7 +319,7 @@ function startApp() {
             backgroundContext.restore();
         }
 
-        function updateSwaps() { // Note to self: rename this function to something more descriptive
+        function updateSwaps() {
             var x, y;
             var emoticonsSwapping = false;
 
@@ -347,7 +345,7 @@ function startApp() {
             }
         }
 
-        function updateDrops() { // rename to updateDropAnimation
+        function updateDrops() {
             var x, y;
             var emoticonsDropping = false;
 
@@ -373,7 +371,7 @@ function startApp() {
         };
     }(); // end of gameView
 
-    // boardImpl 
+    // boardImpl
     boardImpl = function() {
 
         function swapSelectedEmoticons() {
