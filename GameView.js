@@ -25,7 +25,8 @@ function startApp() {
     var backgroundContext = backgroundCanvas.getContext("2d");
 
     // Constants
-    var X_MAX = 8, Y_MAX = 7;
+    var X_MAX = 8,
+        Y_MAX = 7;
     var EMO_WIDTH = (canvas.width / X_MAX);
     var EMO_HEIGHT = (canvas.height / Y_MAX);
     var ANGRY = "ANGRY";
@@ -73,15 +74,14 @@ function startApp() {
     var selections;
     var score = 0;
 
-    Object.defineProperty(Sound.prototype, "volume",
-        {
-            get: function () {
-                return this.audio.volume;
-            },
-            set: function (value) {
-                this.audio.volume = value;
-            }
-        });
+    Object.defineProperty(Sound.prototype, "volume", {
+        get: function() {
+            return this.audio.volume;
+        },
+        set: function(value) {
+            this.audio.volume = value;
+        }
+    });
 
     function Sound(sound, looping) {
         this.looping = typeof looping !== 'undefined' ? looping : false;
@@ -89,7 +89,7 @@ function startApp() {
         this.audio.src = sound + ".ogg";
     }
 
-    Sound.prototype.play = function () {
+    Sound.prototype.play = function() {
         if (this.audio === null) {
             return;
         }
@@ -98,7 +98,7 @@ function startApp() {
         if (!this.looping) {
             return;
         }
-        this.audio.addEventListener("ended", function () {
+        this.audio.addEventListener("ended", function() {
             this.load();
             this.autoplay = true;
         }, false);
@@ -147,7 +147,7 @@ function startApp() {
         function drawGrid() {
             var i;
             for (i = 0; i <= X_MAX; i++) {
-                gridContext.moveTo(i * EMO_WIDTH,  ZERO);
+                gridContext.moveTo(i * EMO_WIDTH, ZERO);
                 gridContext.lineTo(i * EMO_WIDTH, gridCanvas.height);
                 gridContext.stroke(); // vertical
             }
@@ -195,7 +195,7 @@ function startApp() {
         }
 
         function control() {
-            switch(gameState) {
+            switch (gameState) {
                 case gameStates.introducingEmoticons:
                     updateDrops();
                     break;
@@ -444,7 +444,7 @@ function startApp() {
 
                 for (y = (COLUMN_BOTTOM - 1); y >= COLUMN_TOP; y--) {
                     emoticon = emoticons[x][y];
-                    lastEmoType = consecutiveEmoticons[consecutiveEmoticons.length-1].getEmoticonType();
+                    lastEmoType = consecutiveEmoticons[consecutiveEmoticons.length - 1].getEmoticonType();
                     if (emoticon.getEmoticonType() != lastEmoType) {
                         examineList(consecutiveEmoticons, listOfMatches);
                         consecutiveEmoticons = [];
@@ -471,7 +471,7 @@ function startApp() {
 
                 for (x = (ROW_START + 1); x < X_MAX; x++) {
                     emoticon = emoticons[x][y];
-                    lastEmoType = consecutiveEmoticons[consecutiveEmoticons.length-1].getEmoticonType();
+                    lastEmoType = consecutiveEmoticons[consecutiveEmoticons.length - 1].getEmoticonType();
                     if (emoticon.getEmoticonType() != lastEmoType) {
                         examineList(consecutiveEmoticons, listOfMatches);
                         consecutiveEmoticons = [];
@@ -523,7 +523,7 @@ function startApp() {
         }
 
         function playCorrectAudio(firstMatchingType) {
-            switch(firstMatchingType) {
+            switch (firstMatchingType) {
                 case ANGRY:
                     sounds.angry.play();
                     break;
@@ -617,11 +617,11 @@ function startApp() {
                     type = emoticons[x][y].getEmoticonType();
 
                     if ((y - 1 >= COLUMN_TOP &&
-                        emoticons[x][y - 1].getEmoticonType() == type &&
-                        verticalA(type, x, y)) ||
+                            emoticons[x][y - 1].getEmoticonType() == type &&
+                            verticalA(type, x, y)) ||
                         (y - 2 >= COLUMN_TOP &&
-                        emoticons[x][y - 2].getEmoticonType() == type &&
-                        verticalB(type, x, y))) {
+                            emoticons[x][y - 2].getEmoticonType() == type &&
+                            verticalB(type, x, y))) {
                         return true;
                     }
                 }
@@ -631,7 +631,7 @@ function startApp() {
 
         function verticalA(type, x, y) {
             return ((y - 2 >= COLUMN_TOP && verticalAboveA(type, x, y)) ||
-            (y + 1 <= COLUMN_BOTTOM && verticalBelowA(type, x, y)));
+                (y + 1 <= COLUMN_BOTTOM && verticalBelowA(type, x, y)));
         }
 
         /**
@@ -640,8 +640,8 @@ function startApp() {
          */
         function verticalAboveA(type, x, y) {
             return ((y - 3 >= COLUMN_TOP && emoticons[x][y - 3].getEmoticonType() == type) ||
-            (x - 1 >= ROW_START && emoticons[x - 1][y - 2].getEmoticonType() == type) ||
-            (x + 1 < X_MAX && emoticons[x + 1][y - 2].getEmoticonType() == type));
+                (x - 1 >= ROW_START && emoticons[x - 1][y - 2].getEmoticonType() == type) ||
+                (x + 1 < X_MAX && emoticons[x + 1][y - 2].getEmoticonType() == type));
         }
 
         /**
@@ -650,13 +650,13 @@ function startApp() {
          */
         function verticalBelowA(type, x, y) {
             return ((y + 2 <= COLUMN_BOTTOM && emoticons[x][y + 2].getEmoticonType() == type) ||
-            (x - 1 >= ROW_START && emoticons[x - 1][y + 1].getEmoticonType() == type) ||
-            (x + 1 < X_MAX && emoticons[x + 1][y + 1].getEmoticonType() == type));
+                (x - 1 >= ROW_START && emoticons[x - 1][y + 1].getEmoticonType() == type) ||
+                (x + 1 < X_MAX && emoticons[x + 1][y + 1].getEmoticonType() == type));
         }
 
         function verticalB(type, x, y) {
             return ((x - 1 >= ROW_START && emoticons[x - 1][y - 1].getEmoticonType() == type) ||
-            (x + 1 < X_MAX && emoticons[x + 1][y - 1].getEmoticonType() == type));
+                (x + 1 < X_MAX && emoticons[x + 1][y - 1].getEmoticonType() == type));
         }
 
         function horizontalMatchAvailable() {
@@ -667,10 +667,10 @@ function startApp() {
                     type = emoticons[x][y].getEmoticonType();
 
                     if ((x + 1 < X_MAX &&
-                        emoticons[x + 1][y].getEmoticonType() == type &&
-                        horizontalA(type, x, y)) ||
+                            emoticons[x + 1][y].getEmoticonType() == type &&
+                            horizontalA(type, x, y)) ||
                         (x + 2 < X_MAX && emoticons[x + 2][y].getEmoticonType() == type &&
-                        horizontalB(type, x, y))) {
+                            horizontalB(type, x, y))) {
                         return true;
                     }
                 }
@@ -680,7 +680,7 @@ function startApp() {
 
         function horizontalA(type, x, y) {
             return ((x + 2 < X_MAX && horizontalRightA(type, x, y)) ||
-            (x - 1 >= ROW_START && horizontalLeftA(type, x, y)));
+                (x - 1 >= ROW_START && horizontalLeftA(type, x, y)));
         }
 
         /**
@@ -689,8 +689,8 @@ function startApp() {
          */
         function horizontalRightA(type, x, y) {
             return ((x + 3 < X_MAX && emoticons[x + 3][y].getEmoticonType() == type) ||
-            (y - 1 >= COLUMN_TOP && emoticons[x + 2][y - 1].getEmoticonType() == type) ||
-            (y + 1 <= COLUMN_BOTTOM && emoticons[x + 2][y + 1].getEmoticonType() == type));
+                (y - 1 >= COLUMN_TOP && emoticons[x + 2][y - 1].getEmoticonType() == type) ||
+                (y + 1 <= COLUMN_BOTTOM && emoticons[x + 2][y + 1].getEmoticonType() == type));
         }
 
         /**
@@ -699,13 +699,13 @@ function startApp() {
          */
         function horizontalLeftA(type, x, y) {
             return ((x - 2 >= ROW_START && emoticons[x - 2][y].getEmoticonType() == type) ||
-            (y - 1 >= COLUMN_TOP && emoticons[x - 1][y - 1].getEmoticonType() == type) ||
-            (y + 1 <= COLUMN_BOTTOM && emoticons[x - 1][y + 1].getEmoticonType() == type));
+                (y - 1 >= COLUMN_TOP && emoticons[x - 1][y - 1].getEmoticonType() == type) ||
+                (y + 1 <= COLUMN_BOTTOM && emoticons[x - 1][y + 1].getEmoticonType() == type));
         }
 
         function horizontalB(type, x, y) {
             return ((y - 1 >= COLUMN_TOP && emoticons[x + 1][y - 1].getEmoticonType() == type) ||
-            (y + 1 <= COLUMN_BOTTOM && emoticons[x + 1][y + 1].getEmoticonType() == type));
+                (y + 1 <= COLUMN_BOTTOM && emoticons[x + 1][y + 1].getEmoticonType() == type));
         }
 
         return {
@@ -718,7 +718,7 @@ function startApp() {
             dropEmoticons: dropEmoticons
 
         };
-    }();   // end of boardImpl
+    }(); // end of boardImpl
 
     // boardPopulator
     boardPopulator = function() {
@@ -743,11 +743,11 @@ function startApp() {
                     do {
                         newEmoticon = generateEmoticon(x, y, ((y - Y_MAX) - dropGap));
                     } while ((y >= 2 &&
-                    newEmoticon.getEmoticonType() == emoticons[x][y - 1].getEmoticonType() &&
-                    newEmoticon.getEmoticonType() == emoticons[x][y - 2].getEmoticonType()) ||
-                    (x >= 2 &&
-                    newEmoticon.getEmoticonType() == emoticons[x - 1][y].getEmoticonType() &&
-                    newEmoticon.getEmoticonType() == emoticons[x - 2][y].getEmoticonType()));
+                            newEmoticon.getEmoticonType() == emoticons[x][y - 1].getEmoticonType() &&
+                            newEmoticon.getEmoticonType() == emoticons[x][y - 2].getEmoticonType()) ||
+                        (x >= 2 &&
+                            newEmoticon.getEmoticonType() == emoticons[x - 1][y].getEmoticonType() &&
+                            newEmoticon.getEmoticonType() == emoticons[x - 2][y].getEmoticonType()));
                     dropGap--;
                     emoticons[x][y] = newEmoticon;
                 }
@@ -766,9 +766,9 @@ function startApp() {
         function loadImage(imageSrc) {
             var image = new Image();
             image.src = imageSrc;
-            imagesStillLoading ++;
+            imagesStillLoading++;
             image.onload = function() {
-                imagesStillLoading --;
+                imagesStillLoading--;
             };
             return image;
         }
@@ -783,7 +783,7 @@ function startApp() {
                 case 2:
                     return new Emoticon(x, y, embarrassedImage, EMBARRASSED, offScreenStartPositionY);
                 case 3:
-                    return new Emoticon(x, y, surprisedImage, SURPRISED,  offScreenStartPositionY);
+                    return new Emoticon(x, y, surprisedImage, SURPRISED, offScreenStartPositionY);
                 case 4:
                     return new Emoticon(x, y, upsetImage, UPSET, offScreenStartPositionY);
                 default:
@@ -887,7 +887,7 @@ function startApp() {
         this.emoticonType = emoticonType;
         this.screenPositionX = (arrayX * EMO_WIDTH);
         this.screenPositionY = (offScreenStartPositionY * EMO_HEIGHT);
-        this.pixelMovement = 10;//(EMO_HEIGHT / 8);
+        this.pixelMovement = 10; //(EMO_HEIGHT / 8);
         this.dropping = true;
         this.swappingUp = false;
         this.swappingDown = false;
