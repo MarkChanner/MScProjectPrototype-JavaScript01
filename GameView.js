@@ -23,7 +23,6 @@ function startApp() {
   var context = canvas.getContext("2d");
   var backgroundContext = backgroundCanvas.getContext("2d");
 
-  // Constants
   var X_MAX = 8;
   var Y_MAX = 7;
   var EMO_WIDTH = (canvas.width / X_MAX);
