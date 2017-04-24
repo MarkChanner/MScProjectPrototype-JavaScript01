@@ -1,94 +1,117 @@
-/* Prevents gameboard from shifting under scoreboard when screen narrowed */
-* {
-    box-sizing: border-box;
-}
+        /* Prevents gameboard from shifting under scoreboard when screen narrowed */
 
-body {
-    background:  #194673;
-    font-family: Helvetica, Verdana, Geneva, sans-serif;
-    font-size: 80%;
-    font-weight: bold;
-    overflow: hidden;
-}
+        * {
+          box-sizing: border-box;
+        }
 
-.full_width {
-    margin: 0 auto;
-    position: relative;
-    width: 100%;
-}
+        body {
+          background: #194673;
+          font-family: Helvetica, Verdana, Geneva, sans-serif;
+          font-size: 80%;
+          font-weight: bold;
+          overflow: hidden;
+        }
 
-#scoreboard {
-    background-color: #8EAFAA;
-    border: 4px solid #88CDEA;
-    border-radius: 30px;
-    float: left;
-    padding-top: 30px;
-    margin: 50px 10px 10px 30px;
-    max-height: 95vh;
-    min-height: 500px;
-    text-align: center;
-    width: 12%; /*200px;*/
-}
+        .full_width {
+          margin: 0 auto;
+          position: relative;
+          width: 100%;
+        }
 
-.scoreboard_item, button {
-    background-color: #8EAFD7;
-    border: 2px solid black;
-    border-radius: 10px;
-    letter-spacing: 2px;
-    line-height: 1.8em;
-    height: 100px;
-    margin: 10px;
-    min-width: 70px;
-}
+        #scoreboard {
+          background-color: #8EAFAA;
+          border: 4px solid #88CDEA;
+          border-radius: 30px;
+          float: left;
+          padding-top: 30px;
+          margin: 50px 10px 10px 30px;
+          max-height: 95vh;
+          min-height: 500px;
+          text-align: center;
+          width: 12%;
+          /*200px;*/
+        }
 
-button {
-    font-family: Helvetica, Courier, Verdana, Geneva, sans-serif;
-    font-size: 80%;
-    font-weight: bold;
-    height: 80px;
-}
+        .scoreboard_item,
+        button {
+          background-color: #8EAFD7;
+          border: 2px solid black;
+          border-radius: 10px;
+          letter-spacing: 2px;
+          line-height: 1.8em;
+          height: 100px;
+          margin: 10px;
+          min-width: 70px;
+        }
 
-h2 {
-    font-size: 150%;
-}
+        button {
+          font-family: Helvetica, Courier, Verdana, Geneva, sans-serif;
+          font-size: 80%;
+          font-weight: bold;
+          height: 80px;
+        }
 
-h3 {
-    font-size: 150%;
-}
+        h2 {
+          font-size: 150%;
+        }
 
-#background, #emoticons, #grid {
-    border: 5px solid #88CDEA;
-    border-radius: 10px;
-    position: absolute;
-    min-width: 920px;
-    max-width: 1090px;
-    margin: 50px 50px 50px 30px;
-    min-height: 500px;
-    max-height: 95vh;
-}
+        h3 {
+          font-size: 150%;
+        }
 
-.layer1 {
-    background-color: #6991C2;
-    z-index: 1;
-}
+        #background,
+        #emoticons,
+        #grid {
+          border: 5px solid #88CDEA;
+          border-radius: 10px;
+          position: absolute;
+          min-width: 920px;
+          max-width: 1090px;
+          margin: 50px 50px 50px 30px;
+          min-height: 500px;
+          max-height: 95vh;
+        }
 
-.layer2 {
-    z-index: 2;
-}
+        .layer1 {
+          background-color: #6991C2;
+          z-index: 1;
+        }
 
-.layer3 {
-    z-index: 3;
-}
+        .layer2 {
+          z-index: 2;
+        }
 
-@media screen and (max-width: 1150px) {
+        .layer3 {
+          z-index: 3;
+        }
 
-    #scoreboard {
-        display: none;
-        position: absolute;
-        z-index: -99;
-    }
+        @media only screen and (max-width: 480px) {
+          #background {
+            // mobile styles here
+          }
+        }
 
-    #background, #emoticons, #grid {
-        max-width: 100%;
-    }
-}
+        @media only screen and (min-width: 481px) and (max-width: 768px) {
+          #background {
+            // tablet styles here
+          }
+        }
+
+        @media only screen and (min-width 769px) {
+          #background {
+            // desktop styles here
+          }
+        }
+
+        @media only screen and (max-width: 1150px) {
+          #scoreboard {
+            display: none;
+            position: absolute;
+            z-index: -99;
+          }
+          #background,
+          #emoticons,
+          #grid {
+            max-width: 100%;
+          }
+        }
