@@ -5,7 +5,6 @@ window.onload = function() {
 };
 
 function startApp() {
-
   // Initialize canvas layers for gameBoard
   var backgroundCanvas = document.getElementById("background");
   backgroundCanvas.width = backgroundCanvas.offsetWidth;
