@@ -22,23 +22,23 @@ function startApp() {
   var context = canvas.getContext("2d");
   var backgroundContext = backgroundCanvas.getContext("2d");
 
-  var X_MAX = 8;
-  var Y_MAX = 7;
-  var EMO_WIDTH = (canvas.width / X_MAX);
-  var EMO_HEIGHT = (canvas.height / Y_MAX);
-  var ANGRY = "ANGRY";
-  var DELIGHTED = "DELIGHTED";
-  var EMBARRASSED = "EMBARRASSED";
-  var SURPRISED = "SURPRISED";
-  var UPSET = "UPSET";
-  var EMPTY = "EMPTY";
-  var ROW_START = 0;
-  var COLUMN_TOP = 0;
-  var COLUMN_BOTTOM = (Y_MAX - 1);
-  var X = 0;
-  var Y = 1;
-  var DIVISOR = 2;
-  var ZERO = 0;
+  const X_MAX = 8;
+  const Y_MAX = 7;
+  const EMO_WIDTH = (canvas.width / X_MAX);
+  const EMO_HEIGHT = (canvas.height / Y_MAX);
+  const ANGRY = "ANGRY";
+  const DELIGHTED = "DELIGHTED";
+  const EMBARRASSED = "EMBARRASSED";
+  const SURPRISED = "SURPRISED";
+  const UPSET = "UPSET";
+  const EMPTY = "EMPTY";
+  const ROW_START = 0;
+  const COLUMN_TOP = 0;
+  const COLUMN_BOTTOM = (Y_MAX - 1);
+  const X = 0;
+  const Y = 1;
+  const DIVISOR = 2;
+  const ZERO = 0;
 
   var gameStates = {
     introducingEmoticons: 0,
