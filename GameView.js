@@ -142,14 +142,13 @@ function startApp() {
     }
 
     function drawGrid() {
-      var i;
-      for (i = 0; i <= X_MAX; i++) {
+      for (let i = 0; i <= X_MAX; i++) {
         gridContext.moveTo(i * EMO_WIDTH, ZERO);
         gridContext.lineTo(i * EMO_WIDTH, gridCanvas.height);
         gridContext.stroke(); // vertical
       }
 
-      for (i = 0; i <= Y_MAX; i++) {
+      for (let i = 0; i <= Y_MAX; i++) {
         gridContext.moveTo(ZERO, i * EMO_HEIGHT);
         gridContext.lineTo(gridCanvas.width, i * EMO_HEIGHT);
         gridContext.stroke(); // horizontal
@@ -163,12 +162,12 @@ function startApp() {
     }
 
     function drawEmoticons() {
-      var x, y, emoX, emoY;
+      var emoX, emoY;
       clearCanvas();
       context.save();
 
-      for (y = Y_MAX - 1; y >= 0; y--) {
-        for (x = 0; x < X_MAX; x++) {
+      for (let y = Y_MAX - 1; y >= 0; y--) {
+        for (let x = 0; x < X_MAX; x++) {
           emoX = emoticons[x][y].getViewPositionX();
           emoY = emoticons[x][y].getViewPositionY();
           context.drawImage(emoticons[x][y].getImage(), emoX, emoY, EMO_WIDTH, EMO_HEIGHT);
@@ -253,10 +252,10 @@ function startApp() {
       backgroundContext.save();
       backgroundContext.fillStyle = "#C3D7ED";
 
-      for (var i = 0; i < matches.length; i++) {
+      for (let i = 0; i < matches.length; i++) {
         removeList = matches[i];
         incrementScore(removeList.length);
-        for (var j = 0; j < removeList.length; j++) {
+        for (let j = 0; j < removeList.length; j++) {
           emoX = removeList[j].getViewPositionX();
           emoY = removeList[j].getViewPositionY();
           backgroundContext.fillRect(emoX, emoY, EMO_WIDTH, EMO_HEIGHT);
@@ -317,14 +316,13 @@ function startApp() {
     }
 
     function updateSwaps() {
-      var x, y;
       var emoticonsSwapping = false;
 
       if (gameState != gameStates.swapping && gameState != gameStates.revertingSwap) {
         console.log("ERROR in updateSwaps(). gameState != swapping nor revertingSwap");
       }
-      for (y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
-        for (x = ROW_START; x < X_MAX; x++) {
+      for (let y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
+        for (let x = ROW_START; x < X_MAX; x++) {
           if (emoticons[x][y].isSwapping()) {
             emoticonsSwapping = true;
             emoticons[x][y].updateSwapping();
@@ -343,11 +341,10 @@ function startApp() {
     }
 
     function updateDrops() {
-      var x, y;
       var emoticonsDropping = false;
 
-      for (y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
-        for (x = ROW_START; x < X_MAX; x++) {
+      for (let y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
+        for (let x = ROW_START; x < X_MAX; x++) {
           if (emoticons[x][y].isDropping()) {
             emoticonsDropping = true;
             emoticons[x][y].updateDropping();
@@ -380,7 +377,7 @@ function startApp() {
       var emo01Y = emoticons[sel1[X]][sel1[Y]].getArrayY();
       var newEmoticon2 = emoticons[sel1[X]][sel1[Y]];
 
-      var emo02X = emoticons[sel2[X]][sel2[Y]].getArrayX(); // could just say newEmoticon2.getArrayX(); ??
+      var emo02X = emoticons[sel2[X]][sel2[Y]].getArrayX();
       var emo02Y = emoticons[sel2[X]][sel2[Y]].getArrayY();
 
       emoticons[sel1[X]][sel1[Y]] = emoticons[sel2[X]][sel2[Y]];
@@ -391,7 +388,7 @@ function startApp() {
       emoticons[sel2[X]][sel2[Y]].setArrayX(emo02X);
       emoticons[sel2[X]][sel2[Y]].setArrayY(emo02Y);
 
-      // values now swapped, now need to move screen position to reflect
+      // values now swapped, now move screen position to reflect this
       var e1 = emoticons[sel1[X]][sel1[Y]];
       var e2 = emoticons[sel2[X]][sel2[Y]];
 
@@ -430,16 +427,15 @@ function startApp() {
     }
 
     function findVerticalMatches() {
-      var x, y;
       var consecutiveEmoticons = [];
       var listOfMatches = [];
       var emoticon;
       var lastEmoType;
 
-      for (x = ROW_START; x < X_MAX; x++) {
+      for (let x = ROW_START; x < X_MAX; x++) {
         consecutiveEmoticons.push(emoticons[x][COLUMN_BOTTOM]);
 
-        for (y = (COLUMN_BOTTOM - 1); y >= COLUMN_TOP; y--) {
+        for (let y = (COLUMN_BOTTOM - 1); y >= COLUMN_TOP; y--) {
           emoticon = emoticons[x][y];
           lastEmoType = consecutiveEmoticons[consecutiveEmoticons.length - 1].getEmoticonType();
           if (emoticon.getEmoticonType() != lastEmoType) {
@@ -457,16 +453,15 @@ function startApp() {
     }
 
     function findHorizontalMatches() {
-      var x, y;
       var consecutiveEmoticons = [];
       var listOfMatches = [];
       var emoticon;
       var lastEmoType;
 
-      for (y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
+      for (let y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
         consecutiveEmoticons.push(emoticons[ROW_START][y]);
 
-        for (x = (ROW_START + 1); x < X_MAX; x++) {
+        for (let x = (ROW_START + 1); x < X_MAX; x++) {
           emoticon = emoticons[x][y];
           lastEmoType = consecutiveEmoticons[consecutiveEmoticons.length - 1].getEmoticonType();
           if (emoticon.getEmoticonType() != lastEmoType) {
@@ -494,7 +489,7 @@ function startApp() {
       var nextEmoticonType;
       var previousEmoticonType = consecutiveEmoticons[0].getEmoticonType();
 
-      for (var i = 1; i < consecutiveEmoLength; i++) {
+      for (let i = 1; i < consecutiveEmoLength; i++) {
         nextEmoticonType = consecutiveEmoticons[i].getEmoticonType();
         if ((nextEmoticonType == EMPTY) || (nextEmoticonType != previousEmoticonType)) {
           return false;
@@ -541,11 +536,10 @@ function startApp() {
       }
     }
 
-    // Called when no possible matches can be made and game reset (need to reset the board still)
+    // Called when no possible matches can be made and game reset
     function setToDrop() {
-      var x, y;
-      for (y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
-        for (x = ROW_START; x < X_MAX; x++) {
+      for (let y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
+        for (let x = ROW_START; x < X_MAX; x++) {
           emoticons[x][y].setArrayY(Y_MAX);
           emoticons[x][y].setPixelMovement(10);
           emoticons[x][y].setDropping(true);
@@ -559,10 +553,10 @@ function startApp() {
       var removeListLength;
       var xVal, yVal;
 
-      for (var i = 0; i < matchesLength; i++) {
+      for (let i = 0; i < matchesLength; i++) {
         removeList = matches[i];
         removeListLength = removeList.length;
-        for (var j = 0; j < removeListLength; j++) {
+        for (let j = 0; j < removeListLength; j++) {
           xVal = removeList[j].getArrayX();
           yVal = removeList[j].getArrayY();
           if (emoticons[xVal][yVal].getEmoticonType() != EMPTY) {
@@ -574,14 +568,13 @@ function startApp() {
 
     function dropEmoticons() {
       console.log("dropEmoticons() gameState: " + gameState);
-      var x, y;
       var offScreenStartPosition;
       var runnerY;
       var tempY;
 
-      for (x = ROW_START; x < X_MAX; x++) {
+      for (let x = ROW_START; x < X_MAX; x++) {
         offScreenStartPosition = -1;
-        for (y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
+        for (let y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
           if (emoticons[x][y].getEmoticonType() == EMPTY) {
             runnerY = y;
             while ((runnerY >= COLUMN_TOP) && (emoticons[x][runnerY].getEmoticonType() == EMPTY)) {
@@ -607,9 +600,9 @@ function startApp() {
     }
 
     function verticalMatchAvailable() {
-      var x, y, type;
-      for (x = ROW_START; x < X_MAX; x++) {
-        for (y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
+      var type;
+      for (let x = ROW_START; x < X_MAX; x++) {
+        for (let y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
 
           type = emoticons[x][y].getEmoticonType();
 
@@ -657,9 +650,9 @@ function startApp() {
     }
 
     function horizontalMatchAvailable() {
-      var x, y, type;
-      for (y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
-        for (x = ROW_START; x < X_MAX; x++) {
+      var type;
+      for (let y = COLUMN_BOTTOM; y >= COLUMN_TOP; y--) {
+        for (let x = ROW_START; x < X_MAX; x++) {
 
           type = emoticons[x][y].getEmoticonType();
 
@@ -730,13 +723,13 @@ function startApp() {
 
     function populateBoard() {
       console.log("in populateBoard()");
-      var x, y, dropGap, newEmoticon;
+      var dropGap, newEmoticon;
       createImages();
-      for (x = ROW_START; x < X_MAX; x++) {
+      for (let x = ROW_START; x < X_MAX; x++) {
         dropGap = Y_MAX * 2;
         emoticons[x] = [];
 
-        for (y = COLUMN_TOP; y < Y_MAX; y++) {
+        for (let y = COLUMN_TOP; y < Y_MAX; y++) {
           do {
             newEmoticon = generateEmoticon(x, y, ((y - Y_MAX) - dropGap));
           } while ((y >= 2 &&
