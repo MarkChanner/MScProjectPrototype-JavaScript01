@@ -237,7 +237,6 @@ function startApp() {
           }
           break;
         case gameStates.finished:
-          // end game
           break;
       }
     }
