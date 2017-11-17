@@ -364,7 +364,6 @@ function startApp() {
     };
   }(); // end of gameView
 
-  // boardImpl
   boardImpl = function() {
 
     function swapSelectedEmoticons() {
