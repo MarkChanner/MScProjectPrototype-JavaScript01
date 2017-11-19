@@ -64,7 +64,6 @@ function startApp() {
   var matchingXList = [];
   var emoticons = [];
 
-  // function call variables
   var gameView;
   var boardImpl;
   var boardPopulator;
