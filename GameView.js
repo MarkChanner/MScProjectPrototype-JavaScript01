@@ -100,7 +100,6 @@ function startApp() {
     }, false);
   };
 
-  // gameView
   gameView = function() {
 
     var loadSound = function(sound, looping) {
