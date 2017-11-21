@@ -706,7 +706,6 @@ function startApp() {
     };
   }(); // end of boardImpl
 
-  // boardPopulator
   boardPopulator = function() {
     console.log("in boardPopulator()");
     var angryImage,
@@ -790,7 +789,6 @@ function startApp() {
     };
   }(); // end of boardPopulator
 
-  // selections
   selections = function() {
     var selection01Made = false;
 
@@ -865,7 +863,6 @@ function startApp() {
     };
   }(); // end of selections
 
-  // emoticon constructor function
   function Emoticon(arrayX, arrayY, image, emoticonType, offScreenStartPositionY) {
     this.arrayX = arrayX;
     this.arrayY = arrayY;
